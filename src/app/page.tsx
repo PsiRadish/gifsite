@@ -1,11 +1,39 @@
+import React from "react";
+import { useMemo } from "react";
 import Image from "next/image";
 import styles from "./page.module.scss";
+import { categoryOrder, getAllTheGifs } from "./GifContext/GifContext";
 
 export default function Home() {
+    const allTheThings = useMemo(() => getAllTheGifs(), []);
+    
+    console.log(allTheThings);
+    
+    const gifJsx = useMemo(() => {
+        return categoryOrder.map(category => {
+            const gifs = allTheThings["Supergirl"][category];
+            return (
+                <div key={category}>
+                    <h2>{category}</h2>
+                    <div>
+                        {gifs.map((gif, i) => (<React.Fragment key={i}>
+                            <span style={{ display: 'inline-block', width: '150px', height: 'auto' }}>
+                                <img src={gif.url} alt={gif.url} />
+                            </span>
+                            {/* <p>{gif}</p> */}
+                        </React.Fragment>))}
+                    </div>
+                </div>
+            );
+        });
+    }, [allTheThings]);
+    
     return (
         <div className={styles.page}>
             <main className={styles.main}>
-                <Image
+                {gifJsx}
+                
+                {/* <Image
                     className={styles.logo}
                     src="/next.svg"
                     alt="Next.js logo"
@@ -44,9 +72,9 @@ export default function Home() {
                     >
                         Read our docs
                     </a>
-                </div>
+                </div> */}
             </main>
-            <footer className={styles.footer}>
+            {/* <footer className={styles.footer}>
                 <a
                     href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
                     target="_blank"
@@ -89,7 +117,7 @@ export default function Home() {
                     />
                     Go to nextjs.org →
                 </a>
-            </footer>
+            </footer> */}
         </div>
     );
 }
