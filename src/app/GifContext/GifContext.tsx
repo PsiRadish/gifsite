@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import url from 'url';
+import _ from 'lodash';
 
 export type GifInfo =
 {
@@ -84,10 +85,12 @@ export function getAllTheGifs()
         categoryOrder.forEach(category => {
             const sourceAndCategoryPath = path.join(sourceFolderPath, category);
 
-            categoryGifs[category] = fs.readdirSync(sourceAndCategoryPath).map(fileName => {
+            const unsortedGifs = fs.readdirSync(sourceAndCategoryPath).map(fileName => {
                 const filePath = path.join(sourceAndCategoryPath, fileName);
                 return createGifInfoFromFilePath(filePath);
             });
+            
+            categoryGifs[category] = _.sortBy(unsortedGifs, gi => gi.sortBy);
         });
         
         allTheThings[sourceFolder] = categoryGifs;
