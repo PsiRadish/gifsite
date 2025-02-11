@@ -1,0 +1,26 @@
+$font-family-base: Corbel, Gill Sans, Lato, Gill Sans MT, Lucida Grande, Lucida Sans, Trebuchet MS, sans-serif;
+$font-size-base: 16px;
+$font-size-small: $font-size-base * 0.875;
+$line-height-base: 20px / $font-size-base;
+
+$font-family-header         : Consolas, Monaco, Monofur, monospace;
+$font-size-h6               : $font-size-base + 0;  // 16px
+$font-size-h5               : $font-size-base + 1;  // 17px
+$font-size-h4               : $font-size-base + 2;  // 18px
+$font-size-h3               : $font-size-base + 2;  // 18px
+$font-size-h2               : $font-size-base + 10; // 26px
+$font-size-h1               : $font-size-base + 26; // 42px
+$line-height-header         : 1;
+
+$nav-color     : #FF9933;
+$nav-bg-color  : #03305A;
+
+$text-color:       black;
+$background-color: #AAA;
+$content-bg-color: white;
+$brand-color:      $nav-color;
+
+$link-color:       #2E8686;
+$link-hover-color: #589E9E;
+
+$spacing-unit: 1rem;

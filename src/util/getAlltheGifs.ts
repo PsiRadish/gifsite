@@ -7,7 +7,7 @@ import { CategoryGifs, categoryOrder, GifInfo, SourceFolders } from '@/component
 const publicRootUrl = url.pathToFileURL(path.join(process.cwd(), 'public')).href;
 const tagRegex = /\([^)]+\)/g;
 function createGifInfoFromFilePath(filePath: string) {
-    const fileName = path.basename(filePath).replace('¿', '?'); // File names don't allow ? so I used ¿; change it to ?
+    const fileName = path.basename(filePath).replaceAll('¿', '?'); // File names don't allow ? so I used ¿; change it to ?
     const [firstTag, ...otherTags] = fileName.match(tagRegex)?.map(tag => tag.slice(1, -1)) || [];
     const personishTags = firstTag.split('│'); // Not | but │ (Alt + 124) because | can't be used in file names
 
@@ -16,7 +16,7 @@ function createGifInfoFromFilePath(filePath: string) {
         personishTags,
         otherTags,
         sortBy: [
-            ...(otherTags.map(tag => tag.replace('“', '').replace('”', ''))), // Discard quote characters for sorting purposes
+            ...(otherTags.map(tag => tag.replaceAll('“', '').replaceAll('”', ''))), // Discard quote characters for sorting purposes
             ...personishTags
         ].join(' '),
         url: url.pathToFileURL(filePath).href.replace(publicRootUrl, '')

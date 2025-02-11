@@ -1,0 +1,42 @@
+@use 'sass:color';
+@use "@/styles/vars";
+
+.gif-card {
+    display: inline-flex;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #ddd;
+    box-shadow: -2px 3px 3px rgba(0, 0, 0, 0.2);
+    
+    align-items: center;
+    
+    > img {
+        height: 200px;
+    }
+    
+    .info {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        // height: 100%;
+        max-width: 200px;
+        padding: 12px;
+        gap: 4px;
+        
+        .tag {
+            display: inline-block;
+            font-size: 12px;
+            color: var(--foreground);
+            
+            padding: 4px 8px;
+            background: vars.$content-bg-color;
+            line-height: 1rem;
+            border-radius: 1rem;
+            border: 1px solid color.adjust(vars.$content-bg-color, $lightness: -15%);
+            
+            &.person {
+                border-color: color.mix(vars.$content-bg-color, vars.$nav-bg-color, 33%);
+            }
+        }
+    }
+}

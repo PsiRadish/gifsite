@@ -4,6 +4,8 @@ import React, { useMemo } from 'react';
 import { useGifContext } from '@/components/GifContext/GifContext';
 import { categoryOrder, categoryDisplay } from '@/components/GifContext/GifContext.util';
 import Layout from '@/components/Layout';
+import { GifCard } from '@/components/GifCard/GifCard';
+import styles from './sourcePage.module.scss';
 
 const Source: React.FC<{params: Promise<{source: string}>}> = ({ params }) => {
     const { source } = React.use(params);
@@ -14,10 +16,10 @@ const Source: React.FC<{params: Promise<{source: string}>}> = ({ params }) => {
             const gifs = sourceGifs[category];
             return (
                 <div key={category}>
-                    <h3>{categoryDisplay[category]}</h3>
-                    <div>
+                    <h2>{categoryDisplay[category]}</h2>
+                    <div className={styles.cards}>
                         {gifs.map((gif, i) => (
-                            <img key={i} src={gif.url} alt={gif.url} />
+                            <GifCard key={i} gifInfo={gif} />
                         ))}
                     </div>
                 </div>

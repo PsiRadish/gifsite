@@ -1,13 +1,11 @@
-:root {
-    --background: #ffffff;
-    --foreground: #171717;
-}
+@use './vars';
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #0a0a0a;
-        --foreground: #ededed;
-    }
+:root {
+    --background: #{vars.$background-color};
+    --foreground: #{vars.$text-color};
+    --gray-rgb: 0, 0, 0;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
 }
 
 html,
@@ -17,9 +15,13 @@ body {
 }
 
 body {
-    color: var(--foreground);
+    color:      var(--foreground);
     background: var(--background);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: vars.$font-family-base;
+    font-size:   vars.$font-size-base;
+    line-height: vars.$line-height-base;
+    padding: 40px;
+    
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -30,13 +32,105 @@ body {
     margin: 0;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
+/**
+ * Set `margin` to maintain vertical rhythm
+ */
+p, blockquote, pre,
+ul, ol, dl, figure
+{
+    margin: (vars.$spacing-unit * 0.5) 0;
+    
+    &:first-child, &.first
+    {
+        margin-top: 0;
+    }
+    &:last-child, &.last
+    {
+        margin-bottom: 0;
+    }
 }
 
-@media (prefers-color-scheme: dark) {
-    html {
-        color-scheme: dark;
+/**
+ * Lists
+ */
+ul, ol 
+{
+    margin-left: vars.$spacing-unit;
+}
+
+li 
+{
+    > ul,
+    > ol 
+    {
+         margin-bottom: 0;
+    }
+}
+
+/**
+ * Headings
+ */
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6
+{
+    font-weight: 500;
+    line-height: vars.$line-height-header;
+    
+    margin-top:     1em;
+    margin-bottom:  0.5em;
+}
+.h1, .h2, .h3, h1, h2, h3
+{
+    font-family: vars.$font-family-header;
+}
+.h4, .h5, .h6, h4, h5, h6
+{
+    font-family: vars.$font-family-base;
+}
+.h1, h1
+{
+    font-size: vars.$font-size-h1;
+}
+.h2, h2
+{
+    font-size: vars.$font-size-h2;
+    font-variant: small-caps;
+    font-weight: bold;
+    color: vars.$nav-bg-color
+}
+.h3, h3
+{
+    font-size: vars.$font-size-h3;
+    font-weight: bold;
+    font-style: italic;
+}
+.h4, h4
+{
+    font-size: vars.$font-size-h4;
+}
+.h5, h5
+{
+    font-size: vars.$font-size-h5;
+    //font-weight: 600;
+}
+.h6, h6
+{
+    font-size: vars.$font-size-h6;
+    //font-weight: 700;
+}
+
+
+
+/**
+ * Links
+ */
+a 
+{
+    color: vars.$link-color;
+    text-decoration: none;
+    
+    &:hover 
+    {
+        color: vars.$link-hover-color;
+        text-decoration: underline;
     }
 }
